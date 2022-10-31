@@ -23,6 +23,8 @@ import type {
   ReWebTypesType,
 } from 'components-helper'
 
+const builtinType = ['ScrollToOptions']
+
 const typeMap = {
   vue: ['Component', 'VNode', 'CSSProperties', 'StyleValue'],
 }
@@ -104,7 +106,7 @@ const reWebTypesType: ReWebTypesType = (type) => {
   const isUnion = isUnionType(symbol)
   const module = findModule(symbol)
 
-  return isPublicType || !symbol || isUnion
+  return isPublicType || !symbol || builtinType.includes(symbol) || isUnion
     ? type
     : { name: type, source: { symbol, module } }
 }
